@@ -38,14 +38,16 @@ module.exports.run = async (client, message, args) => {
           }
         );
 
-      
+     
+      let user = message.guild.members.cache.get(db.userID)
+
       await new transcripts({
         closedBy: {
           username: message.author.username,
           id: message.author.id
         },
         openedBy: {
-          username: message.guild.members.cache.get(db.userID).user.username,
+	  username: user ? user.user.username : "Unknown User",
           id: db.userID
         },
         data: output,
